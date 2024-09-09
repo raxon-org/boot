@@ -1,19 +1,19 @@
 <?php
-namespace Package\Raxon\Org\Boot\Trait;
+namespace Package\Raxon\Boot\Trait;
 
-use Raxon\Org\App;
+use Raxon\App;
 
-use Raxon\Org\Config;
-use Raxon\Org\Module\Core;
-use Raxon\Org\Module\Dir;
-use Raxon\Org\Module\File;
+use Raxon\Config;
+use Raxon\Module\Core;
+use Raxon\Module\Dir;
+use Raxon\Module\File;
 
-use Raxon\Org\Node\Model\Node;
+use Raxon\Node\Model\Node;
 
 use Exception;
 
-use Raxon\Org\Exception\FileWriteException;
-use Raxon\Org\Exception\ObjectException;
+use Raxon\Exception\FileWriteException;
+use Raxon\Exception\ObjectException;
 
 trait Init {
 
@@ -27,7 +27,7 @@ trait Init {
         Core::interactive();
         $object = $this->object();
         $options = App::options($object);
-        $url_package = $object->config('project.dir.vendor') . 'raxon_org/boot/Data/Package.json';
+        $url_package = $object->config('project.dir.vendor') . 'raxon/boot/Data/Package.json';
         $class = File::basename($url_package, $object->config('extension.json'));
         $packages = $object->data_read($url_package);
         $node = new Node($object);
@@ -92,7 +92,7 @@ trait Init {
                 case Config::MODE_INIT:
                 case Config::MODE_DEVELOPMENT:
                     $environment = Config::MODE_DEVELOPMENT;
-                    $command = Core::binary($object) . ' raxon_org/config framework environment '. $environment . ' -enable-file-permission';
+                    $command = Core::binary($object) . ' raxon/config framework environment '. $environment . ' -enable-file-permission';
                     Core::execute($object, $command, $output, $notification);
                     if(!empty($output)){
                         echo rtrim($output, PHP_EOL) . PHP_EOL;
@@ -102,7 +102,7 @@ trait Init {
                     }
                     break;
                 default:
-                    $command = Core::binary($object) . ' raxon_org/config framework environment '. $environment;
+                    $command = Core::binary($object) . ' raxon/config framework environment '. $environment;
                     Core::execute($object, $command, $output, $notification);
                     if(!empty($output)){
                         echo rtrim($output, PHP_EOL) . PHP_EOL;
