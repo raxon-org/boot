@@ -4,7 +4,7 @@
       {
         "#class": "System.Route",
         "name": "raxon-org-cli-boot",
-        "path": "raxon_org\/boot",
+        "path": "raxon\/boot",
         "controller": "Package:Raxon:Org:Boot:Controller:Cli:run",
         "priority": 1001,
         "request": {
