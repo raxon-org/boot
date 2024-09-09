@@ -1,17 +1,17 @@
 {
   "Package" :[
-    "raxon_org/node",
-    "raxon_org/route",
-    "raxon_org/event",
-    "raxon_org/middleware",
-    "raxon_org/output_filter",
-    "raxon_org/config",
-    "raxon_org/autoload",
-    "raxon_org/server",
-    "raxon_org/log",
-    "raxon_org/host",
-    "raxon_org/basic",
-    "raxon_org/account",
-    "raxon_org/parse"
+    "raxon/node",
+    "raxon/route",
+    "raxon/event",
+    "raxon/middleware",
+    "raxon/output_filter",
+    "raxon/config",
+    "raxon/autoload",
+    "raxon/server",
+    "raxon/log",
+    "raxon/host",
+    "raxon/basic",
+    "raxon/account",
+    "raxon/parse"
   ]
 }
