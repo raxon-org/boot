@@ -1,3 +1,3 @@
 # boot
 
-app difference_fun/boot setup
+app raxon/boot setup
