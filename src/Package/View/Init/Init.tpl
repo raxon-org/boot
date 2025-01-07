@@ -1,1 +1,0 @@
-{{Package.Raxon.Boot:Main:init()}}
