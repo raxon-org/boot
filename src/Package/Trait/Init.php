@@ -64,6 +64,13 @@ trait Init {
                     }
                     $is_install = true;
                 }
+                elseif(property_exists($options, 'patch')){
+                    $record = $response['node'];
+                    $record->mtime = time();
+                    $response = $node->patch($class, $node->role_system(), $record);
+                    echo 'Register update ' . $object->request('package') . ' installation...' . PHP_EOL;
+                    $is_install = true;
+                }
                 elseif(!$response){
                     $command = Core::binary($object) . ' install ' . $package;
                     if(!empty($command_options)){
