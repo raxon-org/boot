@@ -182,6 +182,10 @@
     {
       "name": "System:Parse:record",
       "#class": "Account.Permission"
+    },
+    {
+      "name": "System:Parse:import",
+      "#class": "Account.Permission"
     }
   ]
 }
