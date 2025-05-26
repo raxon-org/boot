@@ -190,6 +190,10 @@
     {
       "name": "System:Parse:list",
       "#class": "Account.Permission"
+    },
+    {
+      "name": "System:Parse:create",
+      "#class": "Account.Permission"
     }
   ]
 }
