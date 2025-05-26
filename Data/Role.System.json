@@ -157,12 +157,10 @@
     },
     {
       "name": "System:Installation:page",
-      "attribute": [],
       "#class": "Account.Permission"
     },
     {
       "name": "System:Installation:page.relation",
-      "attribute": [],
       "#class": "Account.Permission"
     },
     {
@@ -171,17 +169,18 @@
     },
     {
       "name": "System:Installation:list",
-      "attribute": [],
       "#class": "Account.Permission"
     },
     {
       "name": "System:Installation:list.relation",
-      "attribute": [],
       "#class": "Account.Permission"
     },
     {
       "name": "System:Installation:rename",
-      "attribute": [],
+      "#class": "Account.Permission"
+    },
+    {
+      "name": "System:Parse:record",
       "#class": "Account.Permission"
     }
   ]
