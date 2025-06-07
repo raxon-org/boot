@@ -27,6 +27,11 @@ trait Init {
         Core::interactive();
         $object = $this->object();
         $options = App::options($object);
+        if(property_exists($options, 'lock') && $options->lock === 'release'){
+            $dir = new Dir();
+            $read = $dir->read($object->config('project.dir.data') . 'Lock' . $object->config('ds'));
+            ddd($read);
+        }
         $url_package = $object->config('project.dir.vendor') . 'raxon/boot/Data/Package.json';
         $class = File::basename($url_package, $object->config('extension.json'));
         $packages = $object->data_read($url_package);
