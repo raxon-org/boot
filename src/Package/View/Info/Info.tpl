@@ -8,8 +8,10 @@ Package: {{$request.package}}
 
 {{/if}}Commands:
 [01] {{binary()}} {{$request.package}}
+
 [02] {{binary()}} {{$request.package}} setup
 
 Description:
 [01] {{__('info')}}
+
 [02] {{__('setup')}}
