@@ -22,8 +22,7 @@ class Cli extends Controller {
     const DIR = __DIR__ . '/';
     const MODULE_INFO = 'Info';
     const INFO = [
-        '{{binary()}} raxon/boot                    | boot options',
-        '{{binary()}} raxon/boot setup              | boot setup',
+        '{{binary()}} raxon/boot                    | boot options',        
         '{{binary()}} raxon/boot update             | boot update',
     ];
 
