@@ -12,4 +12,4 @@ Package: {{$request.package}}
 
 Description:
 [01] {{__('info')}}
-[01] {{__('setup')}}
+[02] {{__('setup')}}
