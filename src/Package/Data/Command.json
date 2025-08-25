@@ -1,0 +1,17 @@
+{
+ "command": [
+    {
+        "command": "{{binary()}} {{$request.package|>string.lowercase}}",
+        "description": [
+            "{{__('info')}}"
+        ]
+    },
+    {
+        "command": "{{binary()}} {{$request.package|>string.lowercase}} setup",
+        "description": [
+            "{{__('setup')}}"
+        ]
+    }
+    
+ ]   
+}
