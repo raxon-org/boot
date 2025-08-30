@@ -59,6 +59,7 @@ trait Init {
                     $record_options
                 );
                 $command_options = App::options($object, 'command');
+                ddd($command_options);
                 if(property_exists($options, 'force')){
                     $command = Core::binary($object) . ' install ' . $package;
                     if(!empty($command_options)){
