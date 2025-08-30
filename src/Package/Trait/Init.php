@@ -58,8 +58,7 @@ trait Init {
                     $node->role_system(),
                     $record_options
                 );
-                $command_options = App::options($object, 'command');
-                ddd($command_options);
+                $command_options = App::options($object, '#command');                
                 if(property_exists($options, 'force')){
                     $command = Core::binary($object) . ' install ' . $package;
                     if(!empty($command_options)){
@@ -82,8 +81,7 @@ trait Init {
                     $is_install = true;
                 }
                 elseif(!$response){
-                    $command = Core::binary($object) . ' install ' . $package;
-                    ddd($command_options);
+                    $command = Core::binary($object) . ' install ' . $package;                    
                     if(!empty($command_options)){
                         $command = $command . ' ' . implode(' ', $command_options);
                     }
