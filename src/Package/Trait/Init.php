@@ -83,6 +83,7 @@ trait Init {
                 }
                 elseif(!$response){
                     $command = Core::binary($object) . ' install ' . $package;
+                    ddd($command_options);
                     if(!empty($command_options)){
                         $command = $command . ' ' . implode(' ', $command_options);
                     }
