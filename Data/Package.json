@@ -11,6 +11,7 @@
     "raxon/log",
     "raxon/host",
     "raxon/basic",
+    "raxon/doctrine",
     "raxon/account",
     "raxon/parse"
   ]
