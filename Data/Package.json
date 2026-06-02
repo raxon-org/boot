@@ -7,12 +7,12 @@
     "raxon/output_filter",
     "raxon/config",
     "raxon/autoload",
-    "raxon/server",
     "raxon/log",
     "raxon/host",
     "raxon/basic",
     "raxon/doctrine",
     "raxon/account",
+    "raxon/server",
     "raxon/parse"
   ]
 }
