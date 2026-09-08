@@ -50,10 +50,14 @@ trait Init {
             $installed = $object->data_read($url_installed);
         }
         if($installed){
-            foreach($installed->data('System.Installation') as $package => $response){
+            foreach($installed->data('System.Installation') as $response){
                 $command_options = App::options($object, '#command');
+                $name = $response->name ?? null;
+                if($name === null){
+                    continue;
+                }
                 if(property_exists($options, 'force')){
-                    $command = Core::binary($object) . ' install ' . $package;
+                    $command = Core::binary($object) . ' install ' . $name;
                     if(!empty($command_options)){
                         $command = $command . ' ' . implode(' ', $command_options);
                     }
@@ -67,7 +71,7 @@ trait Init {
                     $is_install = true;
                 }
                 elseif($is_release){
-                    $command = Core::binary($object) . ' install ' . $package . ' -patch ';
+                    $command = Core::binary($object) . ' install ' . $name . ' -patch ';
                     if(!empty($command_options)){
                         $command = $command . ' ' . implode(' ', $command_options);
                     }
@@ -80,7 +84,7 @@ trait Init {
                     }
                     $is_install = true;
                 } else {
-                    echo 'Skipping ' . $package . ' installation...' . PHP_EOL;
+                    echo 'Skipping ' . $name . ' installation...' . PHP_EOL;
                 }
                 /*
                 elseif(property_exists($options, 'patch')){
