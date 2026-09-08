@@ -56,6 +56,15 @@ trait Init {
                 if($name === null){
                     continue;
                 }
+                if(
+                    in_array($name, [
+                        "raxon\/git"
+                    ],
+                true
+                    )
+                ){
+                    continue;
+                }
                 if(property_exists($options, 'force')){
                     $command = Core::binary($object) . ' install ' . $name;
                     if(!empty($command_options)){
