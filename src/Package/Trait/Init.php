@@ -27,6 +27,7 @@ trait Init {
         Core::interactive();
         $object = $this->object();
         $options = App::options($object);
+        $is_release = false;
         if(property_exists($options, 'lock') && $options->lock === 'release'){
             $dir = new Dir();
             $read = $dir->read($object->config('project.dir.data') . 'Lock' . $object->config('ds'));
@@ -34,6 +35,78 @@ trait Init {
                 foreach($read as $file){
                     File::delete($file->url);
                 }
+            }
+            $is_release = true;
+        }
+        $url_installed =
+            $object->config('project.dir.node') .
+            'Data' .
+            $object->config('ds') .
+            'System.Installation' .
+            $object->config('extension.json')
+        ;
+        $installed = null;
+        if(File::exist($url_installed)){
+            $installed = $object->data_read($url_installed);
+        }
+        if($installed){
+            foreach($installed->data('System.Installation') as $package => $response){
+                $command_options = App::options($object, '#command');
+                if(property_exists($options, 'force')){
+                    $command = Core::binary($object) . ' install ' . $package;
+                    if(!empty($command_options)){
+                        $command = $command . ' ' . implode(' ', $command_options);
+                    }
+                    Core::execute($object, $command, $output, $notification);
+                    if(!empty($output)){
+                        echo rtrim($output, PHP_EOL) . PHP_EOL;
+                    }
+                    if(!empty($notification)){
+                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
+                    }
+                    $is_install = true;
+                }
+                elseif($is_release){
+                    $command = Core::binary($object) . ' install ' . $package . ' -patch ';
+                    if(!empty($command_options)){
+                        $command = $command . ' ' . implode(' ', $command_options);
+                    }
+                    Core::execute($object, $command, $output, $notification);
+                    if(!empty($output)){
+                        echo rtrim($output, PHP_EOL) . PHP_EOL;
+                    }
+                    if(!empty($notification)){
+                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
+                    }
+                    $is_install = true;
+                } else {
+                    echo 'Skipping ' . $package . ' installation...' . PHP_EOL;
+                }
+                /*
+                elseif(property_exists($options, 'patch')){
+                    $record = $response['node'];
+                    $record->mtime = time();
+                    $response = $node->patch($class, $node->role_system(), $record);
+                    echo 'Register update ' . $object->request('package') . ' installation...' . PHP_EOL;
+                    $is_install = true;
+                }
+                elseif(!$response){
+                    $command = Core::binary($object) . ' install ' . $package;
+                    if(!empty($command_options)){
+                        $command = $command . ' ' . implode(' ', $command_options);
+                    }
+                    Core::execute($object, $command, $output, $notification);
+                    if(!empty($output)){
+                        echo rtrim($output, PHP_EOL) . PHP_EOL;
+                    }
+                    if(!empty($notification)){
+                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
+                    }
+                    $is_install = true;
+                } else {
+                    echo 'Skipping ' . $package . ' installation...' . PHP_EOL;
+                }
+                */
             }
         }
         $url_package = $object->config('project.dir.vendor') . 'raxon/boot/Data/Package.json';
