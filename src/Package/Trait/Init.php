@@ -54,6 +54,7 @@ trait Init {
                 $command_options = App::options($object, '#command');
                 $name = $response->name ?? null;
                 if($name === null){
+                    $is_install = false;
                     continue;
                 }
                 breakpoint($name);
@@ -64,6 +65,7 @@ trait Init {
                 true
                     )
                 ){
+                    $is_install = false;
                     continue;
                 }
                 if(property_exists($options, 'force')){
