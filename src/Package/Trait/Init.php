@@ -56,6 +56,7 @@ trait Init {
                 if($name === null){
                     continue;
                 }
+                breakpoint($name);
                 if(
                     in_array($name, [
                         "raxon\/git"
