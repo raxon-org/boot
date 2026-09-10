@@ -59,7 +59,7 @@ trait Init {
                 }
                 if(
                     in_array($name, [
-                        "raxon\/git"
+                        "raxon/git"
                     ],
                 true
                     )
