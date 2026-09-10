@@ -57,7 +57,6 @@ trait Init {
                     $is_install = false;
                     continue;
                 }
-                breakpoint($name);
                 if(
                     in_array($name, [
                         "raxon\/git"
@@ -65,6 +64,7 @@ trait Init {
                 true
                     )
                 ){
+                    dd('found');
                     $is_install = false;
                     continue;
                 }
