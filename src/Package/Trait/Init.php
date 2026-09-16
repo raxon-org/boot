@@ -28,6 +28,10 @@ trait Init {
         $object = $this->object();
         $options = App::options($object);
         $is_release = false;
+        $dir_application = $object->config('project.dir.application');
+        ddd($dir_application);
+
+
         if(property_exists($options, 'lock') && $options->lock === 'release'){
             $dir = new Dir();
             $read = $dir->read($object->config('project.dir.data') . 'Lock' . $object->config('ds'));
@@ -54,7 +58,6 @@ trait Init {
                 $command_options = App::options($object, '#command');
                 $name = $response->name ?? null;
                 if($name === null){
-                    $is_install = false;
                     continue;
                 }
                 if(
@@ -64,8 +67,6 @@ trait Init {
                 true
                     )
                 ){
-                    dd('found');
-                    $is_install = false;
                     continue;
                 }
                 if(property_exists($options, 'force')){
