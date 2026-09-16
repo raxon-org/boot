@@ -74,7 +74,7 @@ trait Init {
                 ){
                     continue;
                 }
-                $count++;
+
                 if(property_exists($options, 'force')){
                     $command = Core::binary($object) . ' install ' . $name;
                     if(!empty($command_options)){
@@ -88,6 +88,7 @@ trait Init {
                         echo rtrim($notification, PHP_EOL) . PHP_EOL;
                     }
                     $is_install = true;
+                    $count++;
                 }
                 elseif(
                     $is_release &&
@@ -105,6 +106,7 @@ trait Init {
                         echo rtrim($notification, PHP_EOL) . PHP_EOL;
                     }
                     $is_install = true;
+                    $count++;
                 }
                 elseif(!$in_release){
                     $command = Core::binary($object) . ' install ' . $name . ' -patch ';
@@ -119,103 +121,15 @@ trait Init {
                         echo rtrim($notification, PHP_EOL) . PHP_EOL;
                     }
                     $is_install = true;
+                    $count++;
                 }
-
                 else {
                     echo 'Skipping ' . $name . ' installation...' . PHP_EOL;
                 }
-                /*
-                elseif(property_exists($options, 'patch')){
-                    $record = $response['node'];
-                    $record->mtime = time();
-                    $response = $node->patch($class, $node->role_system(), $record);
-                    echo 'Register update ' . $object->request('package') . ' installation...' . PHP_EOL;
-                    $is_install = true;
-                }
-                elseif(!$response){
-                    $command = Core::binary($object) . ' install ' . $package;
-                    if(!empty($command_options)){
-                        $command = $command . ' ' . implode(' ', $command_options);
-                    }
-                    Core::execute($object, $command, $output, $notification);
-                    if(!empty($output)){
-                        echo rtrim($output, PHP_EOL) . PHP_EOL;
-                    }
-                    if(!empty($notification)){
-                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
-                    }
-                    $is_install = true;
-                } else {
-                    echo 'Skipping ' . $package . ' installation...' . PHP_EOL;
-                }
-                */
             }
+            File::touch($file_release);
             echo 'Installed ' . $count . ' packages.' . PHP_EOL;
         }
-        /*
-        $url_package = $object->config('project.dir.vendor') . 'raxon/boot/Data/Package.json';
-        $class = File::basename($url_package, $object->config('extension.json'));
-        $packages = $object->data_read($url_package);
-        $node = new Node($object);
-        $is_install = false;
-        if($packages){
-            foreach($packages->data($class) as $nr => $package){
-                $record_options = [
-                    'where' => [
-                        [
-                            'value' => $package,
-                            'attribute' => 'name',
-                            'operator' => '===',
-                        ]
-                    ],
-                    'process' => true
-                ];
-                $response = $node->record(
-                    'System.Installation',
-                    $node->role_system(),
-                    $record_options
-                );
-                $command_options = App::options($object, '#command');                
-                if(property_exists($options, 'force')){
-                    $command = Core::binary($object) . ' install ' . $package;
-                    if(!empty($command_options)){
-                        $command = $command . ' ' . implode(' ', $command_options);
-                    }
-                    Core::execute($object, $command, $output, $notification);
-                    if(!empty($output)){
-                        echo rtrim($output, PHP_EOL) . PHP_EOL;
-                    }
-                    if(!empty($notification)){
-                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
-                    }
-                    $is_install = true;
-                }
-                elseif(property_exists($options, 'patch')){
-                    $record = $response['node'];
-                    $record->mtime = time();
-                    $response = $node->patch($class, $node->role_system(), $record);
-                    echo 'Register update ' . $object->request('package') . ' installation...' . PHP_EOL;
-                    $is_install = true;
-                }
-                elseif(!$response){
-                    $command = Core::binary($object) . ' install ' . $package;                    
-                    if(!empty($command_options)){
-                        $command = $command . ' ' . implode(' ', $command_options);
-                    }
-                    Core::execute($object, $command, $output, $notification);
-                    if(!empty($output)){
-                        echo rtrim($output, PHP_EOL) . PHP_EOL;
-                    }
-                    if(!empty($notification)){
-                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
-                    }
-                    $is_install = true;
-                } else {
-                    echo 'Skipping ' . $package . ' installation...' . PHP_EOL;
-                }
-            }
-        }
-        */
         if($is_install){
             Config::configure($object);
             $environment = $object->config('framework.environment');
