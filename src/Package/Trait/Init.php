@@ -56,6 +56,7 @@ trait Init {
         if(File::exist($url_installed)){
             $installed = $object->data_read($url_installed);
         }
+        $count = 0;
         if($installed){
             foreach($installed->data('System.Installation') as $response){
                 $command_options = App::options($object, '#command');
@@ -72,6 +73,7 @@ trait Init {
                 ){
                     continue;
                 }
+                $count++;
                 if(property_exists($options, 'force')){
                     $command = Core::binary($object) . ' install ' . $name;
                     if(!empty($command_options)){
@@ -131,6 +133,7 @@ trait Init {
                 }
                 */
             }
+            echo 'Installed ' . $count . ' packages.' . PHP_EOL;
         }
         /*
         $url_package = $object->config('project.dir.vendor') . 'raxon/boot/Data/Package.json';
