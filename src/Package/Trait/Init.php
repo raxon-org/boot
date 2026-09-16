@@ -32,7 +32,6 @@ trait Init {
         $in_release = false;
         $dir_application = $object->config('project.dir.root');
         $file_release = $dir_application . '.release';
-        breakpoint($file_release);
         if(File::exist($file_release)){
             $in_release = true;
         }
