@@ -28,7 +28,7 @@ trait Init {
         $object = $this->object();
         $options = App::options($object);
         $is_release = false;
-        $dir_application = $object->config('project.dir.application');
+        $dir_application = $object->config('project.dir');
         ddd($dir_application);
 
 
