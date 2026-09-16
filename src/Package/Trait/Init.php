@@ -105,7 +105,23 @@ trait Init {
                         echo rtrim($notification, PHP_EOL) . PHP_EOL;
                     }
                     $is_install = true;
-                } else {
+                }
+                elseif(!$in_release){
+                    $command = Core::binary($object) . ' install ' . $name . ' -patch ';
+                    if(!empty($command_options)){
+                        $command = $command . ' ' . implode(' ', $command_options);
+                    }
+                    Core::execute($object, $command, $output, $notification);
+                    if(!empty($output)){
+                        echo rtrim($output, PHP_EOL) . PHP_EOL;
+                    }
+                    if(!empty($notification)){
+                        echo rtrim($notification, PHP_EOL) . PHP_EOL;
+                    }
+                    $is_install = true;
+                }
+
+                else {
                     echo 'Skipping ' . $name . ' installation...' . PHP_EOL;
                 }
                 /*
